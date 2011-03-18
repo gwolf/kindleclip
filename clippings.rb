@@ -3,15 +3,20 @@
 require 'date'
 
 class Clippings < Array
-  def initialize(text)
+  def initialize(text, debug=0)
+    @debug = debug
     @raw = text
     @raw.split(/[\r\n]+==========[\r\n]+/).each do |item|
-      self << ClipItem.new(item)
+      self << ClipItem.new(item, @debug)
     end
   end
 
   def filter_by(field, value)
     select {|i| i.send(field) == value}
+  end
+
+  def books
+    self.map{|clip| clip.book}.uniq
   end
 end
 
@@ -59,7 +64,7 @@ class ClipItem
 
   def read_kind_place_tstamp(str)
     debug 4, 'Parsing: "%s"' % str
-    str =~ /^- (\w+) (.+)  \| Added on (.+)/ or
+    str =~ /^- (\w+) (.+) +\| Added on (.+)/ or
       raise InvalidStructure, 'Cannot parse "%s"' % str
     @kind, @place, tstamp = $1, $2, $3
     raise InvalidStructure, ('Unknown item type: "%s"' % @kind) unless
