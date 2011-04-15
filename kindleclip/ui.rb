@@ -51,11 +51,13 @@ class KindleClipUI
     @filters = {:notes => @glade['ck_show_notes'].active?,
       :bookmarks => @glade['ck_show_notes'].active?,
       :highlights => @glade['ck_show_highlights'].active?,
+      :text => nil,
       :book => nil}
     @models = {}
 
     setup_book_list(@glade['books_treeview'])
     setup_clippings_list(@glade['clippings_treeview'])
+
     refresh_listing
   end
 
@@ -86,7 +88,7 @@ class KindleClipUI
   end
 
   def on_text_filter_entry_activate(entry)
-    set_status 'One day we will do filter_entry_activate'
+    set_text_filter
   end
 
   def on_quit_button_clicked(button)
@@ -94,7 +96,7 @@ class KindleClipUI
   end
 
   def on_filter_button_clicked(button)
-    set_status 'One day we will do filter_button'
+    set_text_filter
   end
 
   def on_revert_button_clicked(button)
@@ -117,18 +119,33 @@ class KindleClipUI
 
   def on_books_treeview_cursor_changed(view)
     # Later: Allow for multiple book selection
-    filters[:book] = view.selection.selected[0]
+    if view.selection.selected
+      filters[:book] = view.selection.selected[0] 
+    else
+      filters[:book] = nil
+    end
     refresh_listing
   end
 
   def on_clippings_treeview_cursor_changed(view)
     row = view.selection.selected
-    @glade['clip_text'].text = "Book: %s\n%s\n\n%s" % [row[0], row[1], row[4]]
+    if row
+      @glade['clip_text'].buffer.text = "Book: %s\n%s\n\n%s" % [row[0], row[1], row[4]]
+    else
+      @glade['clip_text'].buffer.text = ''
+    end
   end
 
   ############################################################
   # 
   private
+
+  def set_text_filter
+    text = @glade['text_filter_entry'].text
+    text = nil if text.empty?
+    @filters[:text] = text
+    refresh_listing
+  end
 
   # Sets the status bar message
   def set_status(text, ctx='status_msg')
@@ -163,6 +180,10 @@ class KindleClipUI
     list = list.reject {|l| l.kind == 'Bookmark'} if !@filters[:bookmarks]
     list = list.reject {|l| l.kind == 'Highlight'} if !@filters[:highlights]
     list = list.reject {|l| l.kind == 'Note'} if !@filters[:notes]
+
+    if has_text = @filters[:text]
+      list = list.select {|l| l.text.index(has_text)}
+    end
 
     list.each do |clip|
       if clip.text.size > 100
