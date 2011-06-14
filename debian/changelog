@@ -1,0 +1,5 @@
+kindleclip (0.2-1) unstable; urgency=low
+
+  * Initial release. (Closes: #630105)
+
+ -- Gunnar Wolf <gwolf@debian.org>  Tue, 14 Jun 2011 18:51:50 -0500
