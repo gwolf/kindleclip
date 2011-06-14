@@ -1,5 +1,5 @@
 Source: kindleclip
-Section:
+Section: text
 Priority: extras
 Maintainer: Gunnar Wolf <gwolf@debian.org>
 Build-Depends: debhelper (>= 7.0.50~)
@@ -10,7 +10,7 @@ Homepage: https://github.com/gwolf/kindleclip
 
 Package: kindleclip
 Architecture: all
-Depends: ${shlibs:Depends}. ${misc:Depends}, ruby, libglade2-ruby
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby, libglade2-ruby
 Description: User interface for managing Amazon Kindle's "My Clippings" file
  Amazon Kindle devices store a "My Clippings.txt" file, where the
  bookmarks, highlights and notes are kept. This application allows you
