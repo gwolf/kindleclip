@@ -1,3 +1,4 @@
 0.2 14-Jun-2011
     * First public, versioned release!
     * Added an "about" window with my information. Ego trip, yay!
+    * The "open" button works — It even reports errors

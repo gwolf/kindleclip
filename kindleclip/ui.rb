@@ -46,7 +46,7 @@ class KindleClipUI
     @glade.add_from_file('kindleclip/kindleclip.glade')
     @glade.connect_signals {|handler| method(handler) }
 
-    @clips = Clippings.new(File.open(clipfile).read, debug)
+    read_clippings(clipfile)
 
     @filters = {:notes => @glade['ck_show_notes'].active?,
       :bookmarks => @glade['ck_show_bookmarks'].active?,
@@ -127,7 +127,16 @@ class KindleClipUI
   end
 
   def on_clipping_file_select_button_clicked(button)
-    set_status 'One day we will do clipping_file_select'
+    chooser = @glade['filechooser']
+    chooser.run
+    chooser.hide
+  end
+
+  def on_filechooser_file_activated(chooser)
+    chooser.hide
+    file = chooser.filename
+    read_clippings(file)
+    refresh_listing
   end
 
   def on_books_treeview_cursor_changed(view)
@@ -154,6 +163,17 @@ class KindleClipUI
   private
   def version
     ::KindleClipVersion
+  end
+
+  def read_clippings(file)
+    begin
+      @clips = Clippings.new(File.open(file).read)
+    rescue ClipItem::InvalidStructure
+      error = @glade['clipping_format_error_dialog']
+      error.run
+      error.hide
+      @clips = Clippings.new('')
+    end
   end
 
   def set_text_filter
