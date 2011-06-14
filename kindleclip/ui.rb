@@ -200,8 +200,12 @@ class KindleClipUI
   end
 
   def setup_clippings_list(treeview)
-    @models[:clip] = setup_list(%w(Book Type Timestamp Text Full), treeview)
-    treeview.get_column(4).visible = false
+    @models[:clip] = setup_list(%w(Type Timestamp Book Text Full), treeview)
+    treeview.get_column(0).max_width = 200 # Type
+    treeview.get_column(1).max_width = 200 # Timestamp
+    treeview.get_column(2).max_width = 500 # Book
+    treeview.get_column(3).max_width = 500 # Text
+    treeview.get_column(4).visible = false # Full
   end
 
   # We specify the listing criteria via @filters
@@ -229,9 +233,9 @@ class KindleClipUI
       end
 
       iter = @models[:clip].append
-      iter[0] = clip.book
-      iter[1] = clip.kind
-      iter[2] = clip.timestamp.strftime('%Y-%m-%d %H:%M')
+      iter[0] = clip.kind
+      iter[1] = clip.timestamp.strftime('%Y-%m-%d %H:%M')
+      iter[2] = clip.book
       iter[3] = short_text.gsub(/\n/,' ')
       iter[4] = clip.text
     end

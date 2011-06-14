@@ -25,6 +25,19 @@ file. It allows you to filter on the type of note you will be
 searching on (notes, bookmarks or highlights), order by author, book
 or date, and filter by text.
 
+Usage
+-----
+
+The "My Clippings.txt" file should be available under the documents/
+directory of your Kindle. You can either use it directly from the
+Kindle, while it is mounted, or copy it over to your filesystem.
+
+By default, kindleclip will open the file "My Clippings.txt" in the
+current directory. You can specify which file to open as an argument
+on invocation — as:
+
+$ kindleclip.rb /media/Kindle/documents/My\ Clippings.txt
+
 Disclaimer
 ----------
 
