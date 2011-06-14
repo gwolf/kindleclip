@@ -49,7 +49,7 @@ class KindleClipUI
     @clips = Clippings.new(File.open(clipfile).read, debug)
 
     @filters = {:notes => @glade['ck_show_notes'].active?,
-      :bookmarks => @glade['ck_show_notes'].active?,
+      :bookmarks => @glade['ck_show_bookmarks'].active?,
       :highlights => @glade['ck_show_highlights'].active?,
       :text => nil,
       :book => nil}
@@ -111,10 +111,12 @@ class KindleClipUI
   end
 
   def on_revert_button_clicked(button)
-    [:bookmarks, :highlights, :notes].each do |kind|
-      @glade['ck_show_%s' % kind].active = true
-      @filters[kind] = true
-    end
+    @glade['ck_show_bookmarks'].active = false
+    @filters[:bookmarks] = false
+    @glade['ck_show_highlights'].active = true
+    @filters[:highlights] = true
+    @glade['ck_show_notes'].active = true
+    @filters[:notes] = true
 
     # We should also reset the selector on @glade['books_treeview'] -
     # Right now, this only gets the same effect by clearing the filter
