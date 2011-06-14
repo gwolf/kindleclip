@@ -340,7 +340,7 @@
     <property name="type_hint">normal</property>
     <property name="program_name">Kindleclip</property>
     <property name="version">(version-in-src)</property>
-    <property name="copyright" translatable="yes">Copyright &#xA9; 2010-2011 Gunnar Wolf &lt;gwolf@gwolf.org&gt;</property>
+    <property name="copyright" translatable="yes">Copyright &#xA9; 2011 Gunnar Wolf &lt;gwolf@gwolf.org&gt;</property>
     <property name="comments" translatable="yes">User interface for managing Amazon Kindle's "My Clippings" file
 
 Amazon Kindle devices store a "My Clippings.txt" file, where the bookmarks, highlights and notes are kept. This application allows you to search within the clippings, filter the contents, and copy and paste to other applications.
