@@ -29,6 +29,8 @@
 # This program is in no way endorsed, promoted or should be associated
 # with Amazon. It is not –and does not aim to be– an official Kindle
 # project.
+KindleClipVersion = '0.2'
+
 require 'clippings'
 require 'kindleclip/ui'
 

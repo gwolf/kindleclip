@@ -67,6 +67,13 @@ class KindleClipUI
     window.signal_connect('destroy') {Gtk.main_quit}
   end
 
+  def show_about_window
+    about = @glade['aboutdialog1']
+    about.version = version
+    about.run
+    about.hide
+  end
+
   ############################################################
   # Callbacks
   def on_ck_show_notes_toggled(ckbox)
@@ -97,6 +104,10 @@ class KindleClipUI
 
   def on_filter_button_clicked(button)
     set_text_filter
+  end
+
+  def on_about_button_clicked(button)
+    show_about_window
   end
 
   def on_revert_button_clicked(button)
@@ -139,6 +150,9 @@ class KindleClipUI
   ############################################################
   # 
   private
+  def version
+    ::KindleClipVersion
+  end
 
   def set_text_filter
     text = @glade['text_filter_entry'].text

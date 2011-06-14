@@ -41,6 +41,21 @@
               </packing>
             </child>
             <child>
+              <object class="GtkButton" id="about_button">
+                <property name="label">gtk-about</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_about_button_clicked"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkButton" id="quit_button">
                 <property name="label">gtk-quit</property>
                 <property name="visible">True</property>
@@ -52,7 +67,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">2</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
@@ -314,6 +329,51 @@
             <property name="expand">False</property>
             <property name="pack_type">end</property>
             <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkAboutDialog" id="aboutdialog1">
+    <property name="border_width">5</property>
+    <property name="type">popup</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="type_hint">normal</property>
+    <property name="program_name">Kindleclip</property>
+    <property name="version">(version-in-src)</property>
+    <property name="copyright" translatable="yes">Copyright &#xA9; 2010-2011 Gunnar Wolf &lt;gwolf@gwolf.org&gt;</property>
+    <property name="comments" translatable="yes">User interface for managing Amazon Kindle's "My Clippings" file
+
+Amazon Kindle devices store a "My Clippings.txt" file, where the bookmarks, highlights and notes are kept. This application allows you to search within the clippings, filter the contents, and copy and paste to other applications.
+
+This program is in no way endorsed, promoted or should be associated with Amazon. It is not &#x2013;and does not aim to be&#x2013; an official Kindle project.
+</property>
+    <property name="website">https://github.com/gwolf/kindleclip</property>
+    <property name="license" translatable="yes">This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+</property>
+    <property name="authors">Copyright &#xA9; 2010-2011 Gunnar Wolf &lt;gwolf@gwolf.org&gt;</property>
+    <property name="wrap_license">True</property>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox1">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">1</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area1">
+            <property name="visible">True</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
           </packing>
         </child>
       </object>
