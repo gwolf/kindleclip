@@ -2,3 +2,4 @@
     * First public, versioned release!
     * Added an "about" window with my information. Ego trip, yay!
     * The "open" button works — It even reports errors
+    * Moved source layout to use Minero Aoki's setup.rb
