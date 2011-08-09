@@ -7,4 +7,5 @@ override_dh_auto_install:
 	ruby setup.rb all --shebang=never\
 		--prefix=debian/kindleclip/usr \
 		--siterubyver=debian/kindleclip/usr/lib/ruby/1.8 \
-		--datadir=debian/kindleclip/usr/share/kindleclip/
+		--datadir=debian/kindleclip/usr/share/kindleclip/ \
+		--mandir=debian/kindleclip/usr/share/man/man1/
