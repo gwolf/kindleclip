@@ -1,0 +1,22 @@
+Format: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=173
+Upstream-Name: kindleclip
+Upstream-Contact: Gunnar Wolf <gwolf@gwolf.org>
+Source: https://github.com/gwolf/kindleclip
+
+Files: *
+Copyright: Copyright (c) 2011 Gunnar Wolf <gwolf@gwolf.org>
+License: GPL-3+
+
+Files: debian/*
+Copyright: Copyright © 2011 Gunnar Wolf <gwolf@debian.org>
+License: GPL-3+
+
+License: GPL-3+
+ The files hereby included are free software; you can distribute them
+ under the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3 of the License, or (at
+ your option) any later version.
+ .
+ On Debian systems, the full text of the GNU General Public
+ License version 3 can be found in the file
+ `/usr/share/common-licenses/GPL-3'.
