@@ -4,7 +4,7 @@
 # =============
 #
 # User interface for managing Amazon Kindle's "My Clippings"
-# file. This file implements the UI bindings with Glade.
+# file. This file implements the UI bindings with Gtk::Builder.
 #
 # Copyright © 2011 Gunnar Wolf <gwolf@gwolf.org>
 #
@@ -29,54 +29,54 @@
 # This program is in no way endorsed, promoted or should be associated
 # with Amazon. It is not –and does not aim to be– an official Kindle
 # project.
-require 'libglade2'
+require 'gtk2'
 require 'gettext'
 require 'clippings'
 
 class KindleClipUI
   include GetText
   bindtextdomain('kindleclip', ENV['GETTEXT_PATH'])
-  attr_accessor :glade, :clips, :models, :filters
+  attr_accessor :builder, :clips, :models, :filters
 
   def initialize(clipfile, domain='kindleclip', localedir='locale')
     bindtextdomain(domain, localedir)
     debug = 0
 
-    gladefile = ['./data', '/usr/share', '/usr/share/kindleclip',
-                 '/usr/local/share', '/usr/local/share/kindleclip'].
-      map {|dir| File.join(dir, 'kindleclip.glade')}.
+    xmlfile = ['./data', '/usr/share', '/usr/share/kindleclip',
+               '/usr/local/share', '/usr/local/share/kindleclip'].
+      map {|dir| File.join(dir, 'kindleclip.xml')}.
       select {|f| File.exists?(f)}.first
-    if gladefile.nil?
-      raise LoadError, _('Could not find UI definition (kindleclip.glade)')
+    if xmlfile.nil?
+      raise LoadError, _('Could not find UI definition (kindleclip.xml)')
     end
 
-    @glade = Gtk::Builder.new
-    @glade.add_from_file(gladefile)
-    @glade.connect_signals {|handler| method(handler) }
+    @builder = Gtk::Builder.new
+    @builder.add_from_file(xmlfile)
+    @builder.connect_signals {|handler| method(handler) }
 
     read_clippings(clipfile)
 
-    @filters = {:notes => @glade['ck_show_notes'].active?,
-      :bookmarks => @glade['ck_show_bookmarks'].active?,
-      :highlights => @glade['ck_show_highlights'].active?,
+    @filters = {:notes => @builder['ck_show_notes'].active?,
+      :bookmarks => @builder['ck_show_bookmarks'].active?,
+      :highlights => @builder['ck_show_highlights'].active?,
       :text => nil,
       :book => nil}
     @models = {}
 
-    setup_book_list(@glade['books_treeview'])
-    setup_clippings_list(@glade['clippings_treeview'])
+    setup_book_list(@builder['books_treeview'])
+    setup_clippings_list(@builder['clippings_treeview'])
 
     refresh_listing
   end
 
   def show
-    window = @glade['window1']
+    window = @builder['window1']
     window.show_all
     window.signal_connect('destroy') {Gtk.main_quit}
   end
 
   def show_about_window
-    about = @glade['aboutdialog1']
+    about = @builder['aboutdialog1']
     about.version = version
     about.run
     about.hide
@@ -119,23 +119,23 @@ class KindleClipUI
   end
 
   def on_revert_button_clicked(button)
-    @glade['ck_show_bookmarks'].active = false
+    @builder['ck_show_bookmarks'].active = false
     @filters[:bookmarks] = false
-    @glade['ck_show_highlights'].active = true
+    @builder['ck_show_highlights'].active = true
     @filters[:highlights] = true
-    @glade['ck_show_notes'].active = true
+    @builder['ck_show_notes'].active = true
     @filters[:notes] = true
 
-    # We should also reset the selector on @glade['books_treeview'] -
+    # We should also reset the selector on @builder['books_treeview'] -
     # Right now, this only gets the same effect by clearing the filter
-    @glade['books_treeview'].selection.unselect_all
+    @builder['books_treeview'].selection.unselect_all
     @filters[:book] = nil
 
     refresh_listing
   end
 
   def on_clipping_file_select_button_clicked(button)
-    chooser = @glade['filechooser']
+    chooser = @builder['filechooser']
     chooser.run
     chooser.hide
   end
@@ -160,9 +160,9 @@ class KindleClipUI
   def on_clippings_treeview_cursor_changed(view)
     row = view.selection.selected
     if row
-      @glade['clip_text'].buffer.text = "Book: %s\n%s\n\n%s" % [row[0], row[1], row[4]]
+      @builder['clip_text'].buffer.text = "Book: %s\n%s\n\n%s" % [row[0], row[1], row[4]]
     else
-      @glade['clip_text'].buffer.text = ''
+      @builder['clip_text'].buffer.text = ''
     end
   end
 
@@ -177,7 +177,7 @@ class KindleClipUI
     begin
       @clips = Clippings.new(File.open(file).read)
     rescue ClipItem::InvalidStructure
-      error = @glade['clipping_format_error_dialog']
+      error = @builder['clipping_format_error_dialog']
       error.run
       error.hide
       @clips = Clippings.new('')
@@ -185,7 +185,7 @@ class KindleClipUI
   end
 
   def set_text_filter
-    text = @glade['text_filter_entry'].text
+    text = @builder['text_filter_entry'].text
     text = nil if text.empty?
     @filters[:text] = text
     refresh_listing
@@ -193,7 +193,7 @@ class KindleClipUI
 
   # Sets the status bar message
   def set_status(text, ctx='status_msg')
-    status = @glade['status']
+    status = @builder['status']
     context = status.get_context_id(ctx)
     status.pop(context)
     status.push(context, text)
