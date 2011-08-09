@@ -42,8 +42,16 @@ class KindleClipUI
     bindtextdomain(domain, localedir)
     debug = 0
 
+    gladefile = ['./data', '/usr/share', '/usr/share/kindleclip',
+                 '/usr/local/share', '/usr/local/share/kindleclip'].
+      map {|dir| File.join(dir, 'kindleclip.glade')}.
+      select {|f| File.exists?(f)}.first
+    if gladefile.nil?
+      raise LoadError, _('Could not find UI definition (kindleclip.glade)')
+    end
+
     @glade = Gtk::Builder.new
-    @glade.add_from_file('kindleclip/kindleclip.glade')
+    @glade.add_from_file(gladefile)
     @glade.connect_signals {|handler| method(handler) }
 
     read_clippings(clipfile)
