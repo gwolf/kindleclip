@@ -1,3 +1,7 @@
+0.3 9-Aug-2011
+    * Update from deprecated libglade2 to Gtk::Builder
+    * Added a manpage
+
 0.2 14-Jun-2011
     * First public, versioned release!
     * Added an "about" window with my information. Ego trip, yay!
