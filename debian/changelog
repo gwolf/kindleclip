@@ -1,3 +1,11 @@
+kindleclip (0.3-2) unstable; urgency=low
+
+  * Added missing build-dependency on ruby | ruby-interpreter (Closes: #642258)
+  * Install the Ruby modules in the version-agnostic directory so it can
+    be run with 1.9.1 as well
+
+ -- Gunnar Wolf <gwolf@debian.org>  Wed, 21 Sep 2011 12:37:12 -0500
+
 kindleclip (0.3-1) unstable; urgency=low
 
   * Initial release. (Closes: #630105)
