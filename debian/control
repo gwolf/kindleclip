@@ -10,7 +10,7 @@ Homepage: https://github.com/gwolf/kindleclip
 
 Package: kindleclip
 Architecture: all
-Depends: ${misc:Depends}, ruby | ruby-interpreter, ruby-gtk2
+Depends: ${misc:Depends}, ruby | ruby-interpreter, ruby-gtk2, ruby-gettext
 Description: User interface for managing Amazon Kindle's "My Clippings" file
  Amazon Kindle devices store a "My Clippings.txt" file, where the
  bookmarks, highlights and notes are kept. This application allows you

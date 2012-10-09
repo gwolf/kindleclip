@@ -1,3 +1,9 @@
+kindleclip (0.3-3) UNRELEASED; urgency=low
+
+  * Added missing dependency on ruby-gettext (Closes: #690045)
+
+ -- Gunnar Wolf <gwolf@debian.org>  Tue, 09 Oct 2012 09:41:45 -0500
+
 kindleclip (0.3-2) unstable; urgency=low
 
   * Added missing build-dependency on ruby | ruby-interpreter (Closes: #642258)
