@@ -1,4 +1,4 @@
-kindleclip (0.3-3) UNRELEASED; urgency=low
+kindleclip (0.3-3) unstable; urgency=low
 
   * Added missing dependency on ruby-gettext (Closes: #690045)
 
