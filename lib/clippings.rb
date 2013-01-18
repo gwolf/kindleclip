@@ -34,7 +34,7 @@ require 'date'
 class Clippings < Array
   def initialize(text, debug=0)
     @debug = debug
-    @raw = text
+    @raw = ck_encoding(text)
     @raw.split(/[\r\n]+==========[\r\n]+/).each do |item|
       self << ClipItem.new(item, @debug)
     end
@@ -46,6 +46,15 @@ class Clippings < Array
 
   def books
     self.map{|clip| clip.book}.uniq
+  end
+
+  private
+  def ck_encoding(str)
+    return str if str.valid_encoding?
+    str.lines.map do |lin|
+      lin.valid_encoding? ? lin :
+        lin.chars.select{|c| c.valid_encoding?}
+    end.join
   end
 end
 
