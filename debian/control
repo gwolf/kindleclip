@@ -3,7 +3,7 @@ Section: text
 Priority: extra
 Maintainer: Gunnar Wolf <gwolf@debian.org>
 Build-Depends: debhelper (>= 7.0.50~), ruby | ruby-interpreter
-Standards-Version: 3.9.2
+Standards-Version: 3.9.5
 Vcs-Git: git://github.com/gwolf/kindleclip.git
 Vcs-Browser: https://github.com/gwolf/kindleclip
 Homepage: https://github.com/gwolf/kindleclip

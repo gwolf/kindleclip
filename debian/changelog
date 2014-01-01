@@ -1,3 +1,10 @@
+kindleclip (0.5-1) unstable; urgency=low
+
+  * New upstream release: Add a column (user request)
+  * Standards-version 3.9.2 → 3.9.5 (no changes needed)
+
+ -- Gunnar Wolf <gwolf@debian.org>  Wed, 01 Jan 2014 11:32:54 -0300
+
 kindleclip (0.4-1) unstable; urgency=low
 
   * New upstream release: Fix crash when working with UTF-invalid files
