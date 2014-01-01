@@ -6,7 +6,7 @@
 # User interface for managing Amazon Kindle's "My Clippings"
 # file. This file implements the "My Clippings.txt" parsing logic.
 #
-# Copyright © 2011 Gunnar Wolf <gwolf@gwolf.org>
+# Copyright © 2011-2014 Gunnar Wolf <gwolf@gwolf.org>
 #
 # ============================================================
 #
@@ -105,6 +105,7 @@ class ClipItem
     str =~ /^- (\w+) (.+) +\| Added on (.+)/ or
       raise InvalidStructure, 'Cannot parse "%s"' % str
     @kind, @place, tstamp = $1, $2, $3
+    @place.gsub!(/(?:on )?(:?Page|Loc\.)/, '')
     raise InvalidStructure, ('Unknown item type: "%s"' % @kind) unless
       ItemTypes.include?(@kind)
     @timestamp = DateTime.parse(tstamp) or

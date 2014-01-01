@@ -6,7 +6,7 @@
 # User interface for managing Amazon Kindle's "My Clippings"
 # file. This file implements the UI bindings with Gtk::Builder.
 #
-# Copyright © 2011 Gunnar Wolf <gwolf@gwolf.org>
+# Copyright © 2011-2014 Gunnar Wolf <gwolf@gwolf.org>
 #
 # ============================================================
 #
@@ -160,7 +160,7 @@ class KindleClipUI
   def on_clippings_treeview_cursor_changed(view)
     row = view.selection.selected
     if row
-      @builder['clip_text'].buffer.text = "Book: %s\n%s\n\n%s" % [row[0], row[1], row[4]]
+      @builder['clip_text'].buffer.text = "Book: %s\n%s\n\n%s" % [row[0], row[1], row[5]]
     else
       @builder['clip_text'].buffer.text = ''
     end
@@ -208,12 +208,13 @@ class KindleClipUI
   end
 
   def setup_clippings_list(treeview)
-    @models[:clip] = setup_list(%w(Type Timestamp Book Text Full), treeview)
+    @models[:clip] = setup_list(%w(Type Timestamp Book Location Text Full), treeview)
     treeview.get_column(0).max_width = 200 # Type
     treeview.get_column(1).max_width = 200 # Timestamp
-    treeview.get_column(2).max_width = 500 # Book
-    treeview.get_column(3).max_width = 500 # Text
-    treeview.get_column(4).visible = false # Full
+    treeview.get_column(2).max_width = 400 # Book
+    treeview.get_column(3).max_width = 100 # Location
+    treeview.get_column(4).max_width = 500 # Text
+    treeview.get_column(5).visible = false # Full
   end
 
   # We specify the listing criteria via @filters
@@ -244,8 +245,9 @@ class KindleClipUI
       iter[0] = clip.kind
       iter[1] = clip.timestamp.strftime('%Y-%m-%d %H:%M')
       iter[2] = clip.book
-      iter[3] = short_text.gsub(/\n/,' ')
-      iter[4] = clip.text
+      iter[3] = clip.place
+      iter[4] = short_text.gsub(/\n/,' ')
+      iter[5] = clip.text
     end
 
 
