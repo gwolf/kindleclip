@@ -59,7 +59,7 @@ class Clippings < Array
 end
 
 class ClipItem
-  ItemTypes = %w(Note Bookmark Highlight)
+  ItemTypes = ['Note', 'Bookmark', 'Highlight', 'Clip this article']
   class InvalidStructure < ArgumentError; end
 
   attr_accessor :book, :kind, :place, :timestamp, :text
