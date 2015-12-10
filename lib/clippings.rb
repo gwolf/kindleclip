@@ -106,6 +106,8 @@ class ClipItem
       raise InvalidStructure, 'Cannot parse "%s"' % str
     @kind, @place, tstamp = $1, $2, $3
     @place.gsub!(/(?:on )?(:?Page|Loc\.)/, '')
+    # Strip meaningless 'Your' prefix on some newer Kindles' clippings
+    @kind.gsub!(/^Your\ */, '')
     raise InvalidStructure, ('Unknown item type: "%s"' % @kind) unless
       ItemTypes.include?(@kind)
     @timestamp = DateTime.parse(tstamp) or
