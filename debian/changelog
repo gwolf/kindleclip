@@ -1,3 +1,13 @@
+kindleclip (0.6-1) unstable; urgency=medium
+
+  * New upstream version: Add some clipping types, redo some parsing
+    logic, due to user request (Github pull requests)
+  * Fix obsolete call to ::Config in setup.rb which caused the package to
+    FTBFS (Closes: #805205)
+  * Standards version 3.9.5→3.9.7 (no changes needed)
+
+ -- Gunnar Wolf <gwolf@debian.org>  Thu, 31 Mar 2016 13:42:05 -0600
+
 kindleclip (0.5-1) unstable; urgency=low
 
   * New upstream release: Add a column (user request)
