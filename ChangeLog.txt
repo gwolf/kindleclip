@@ -1,3 +1,9 @@
+0.6 31-Mar-2016
+    * Fix setup.rb, which still refered to Ruby pre-1.9.1's Config
+      module (nowadays, RbConfig)
+    * Rework ClipItem#read_kind_place_tstamp due to format changes
+      in newer Kindle models
+
 0.5 01-Jan-2014
     * By user request, add a column specifying "location".
 
