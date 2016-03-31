@@ -59,7 +59,7 @@ class Clippings < Array
 end
 
 class ClipItem
-  ItemTypes = ['Note', 'Bookmark', 'Highlight', 'Clip this article']
+  ItemTypes = ['Note', 'Bookmark', 'Highlight', 'Clip This Article']
   class InvalidStructure < ArgumentError; end
 
   attr_accessor :book, :kind, :place, :timestamp, :text
@@ -80,7 +80,7 @@ class ClipItem
     @debug = debug.is_a?(Fixnum) ? debug : 0
 
     debug 4, '=' * 10
-    debug 5, "Processing\n:\n%s" % text
+    debug 5, "Processing:\n%s" % text
 
     lines = text.split(/\r?\n/)
     read_title(lines.shift)
@@ -102,12 +102,14 @@ class ClipItem
 
   def read_kind_place_tstamp(str)
     debug 4, 'Parsing: "%s"' % str
-    str =~ /^- (\w+) (.+) +\| Added on (.+)/ or
+    # With further Kindle models, this once-too-simple descriptor line
+    # has become somewhat complex. Still, by mistreating the regexp
+    # builder, we can still make sense out of it ;-)
+    regex = Regexp.new("^- (?:Your )?(#{ItemTypes.join('|')}) (.+) +\\| Added on (.+)")
+    str =~ regex or
       raise InvalidStructure, 'Cannot parse "%s"' % str
     @kind, @place, tstamp = $1, $2, $3
     @place.gsub!(/(?:on )?(:?Page|Loc\.)/, '')
-    # Strip meaningless 'Your' prefix on some newer Kindles' clippings
-    @kind.gsub!(/^Your\ */, '')
     raise InvalidStructure, ('Unknown item type: "%s"' % @kind) unless
       ItemTypes.include?(@kind)
     @timestamp = DateTime.parse(tstamp) or
