@@ -2,7 +2,7 @@ Source: kindleclip
 Section: text
 Priority: extra
 Maintainer: Gunnar Wolf <gwolf@debian.org>
-Build-Depends: debhelper (>= 7.0.50~), ruby | ruby-interpreter
+Build-Depends: debhelper (>= 12~), ruby | ruby-interpreter
 Standards-Version: 3.9.7
 Vcs-Git: git://github.com/gwolf/kindleclip.git
 Vcs-Browser: https://github.com/gwolf/kindleclip
