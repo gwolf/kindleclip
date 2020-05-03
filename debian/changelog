@@ -4,6 +4,7 @@ kindleclip (0.6-2) UNRELEASED; urgency=medium
   * Bump debhelper from deprecated 7 to 12.
   * Set debhelper-compat version in Build-Depends.
   * Change priority extra to priority optional.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit.
 
  -- Debian Janitor <janitor@jelmer.uk>  Sun, 03 May 2020 16:05:28 +0000
 
