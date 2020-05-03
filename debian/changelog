@@ -1,3 +1,9 @@
+kindleclip (0.6-2) UNRELEASED; urgency=medium
+
+  * Use versioned copyright format URI.
+
+ -- Debian Janitor <janitor@jelmer.uk>  Sun, 03 May 2020 16:05:28 +0000
+
 kindleclip (0.6-1) unstable; urgency=medium
 
   * New upstream version: Add some clipping types, redo some parsing

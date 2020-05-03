@@ -1,4 +1,4 @@
-Format: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=173
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: kindleclip
 Upstream-Contact: Gunnar Wolf <gwolf@gwolf.org>
 Source: https://github.com/gwolf/kindleclip
