@@ -1,6 +1,6 @@
 Source: kindleclip
 Section: text
-Priority: extra
+Priority: optional
 Maintainer: Gunnar Wolf <gwolf@debian.org>
 Build-Depends: debhelper-compat (= 13), ruby | ruby-interpreter
 Standards-Version: 3.9.7
